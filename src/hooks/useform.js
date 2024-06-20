@@ -1,17 +1,38 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-function useForm(initialValues) {
-    const [values, setValues] = useState(initialValues);
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setValues({
-        ...values,
+const useForm = (initialValues) => {
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    if (type === "checkbox") {
+      if (checked) {
+        setValues((prevValues) => ({
+          ...prevValues,
+          [name]: [...(prevValues[name] || []), value],
+        }));
+      } else {
+        setValues((prevValues) => ({
+          ...prevValues,
+          [name]: prevValues[name].filter((skill) => skill !== value),
+        }));
+      }
+    } else {
+      setValues((prevValues) => ({
+        ...prevValues,
         [name]: value,
-      });
-    };
-  
-    return [values, handleChange];
-}
+      }));
+    }
+  };
 
-export default useForm
+  return {
+    values,
+    setValues,
+    errors,
+    setErrors,
+    handleChange,
+  };
+};
+
+export default useForm;

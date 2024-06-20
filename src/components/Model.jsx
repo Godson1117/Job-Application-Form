@@ -44,7 +44,7 @@ const Modal = ({ data }) => {
                                     </h3>
                                     <div className="mt-2 p-6">
                                         <p className="text-sm text-gray-500">
-                                            Name: {data.name}
+                                            Full Name: {data.fullName}
                                         </p>
 
                                         <p className="text-sm text-gray-500">
@@ -52,15 +52,31 @@ const Modal = ({ data }) => {
                                         </p>
 
                                         <p className="text-sm text-gray-500">
-                                            Age: {data.age}
+                                            Phone Number: {data.phoneNumber}
                                         </p>
 
                                         <p className="text-sm text-gray-500">
-                                            Attending with a guest: {data.attendingWithGuest}
+                                            Position: {data.position}
                                         </p>
 
                                         <p className="text-sm text-gray-500">
-                                            {data.guestName && `Guest Name: ${data.guestName}`}
+                                            {(data.position === 'Developer' || data.position === 'Designer') && `Relevant Experience: ${data.relevantExperience}`}
+                                        </p>
+
+                                        <p className="text-sm text-gray-500">
+                                            {data.position === 'Designer' && `Portfolio URL: ${data.portfolioURL}`}
+                                        </p>
+
+                                        <p className="text-sm text-gray-500">
+                                            {data.position === 'Manager' && `Management Experirence: ${data.managementExperience}`}
+                                        </p>
+
+                                        <p className="text-sm text-gray-500">
+                                            Additional Skills: {data.additionalSkills.map(skill => <p>{skill}</p>)}
+                                        </p>
+
+                                        <p className="text-sm text-gray-500">
+                                            Preffered Interview Time: {data.preferredInterviewTime}
                                         </p>
 
                                     </div>
